@@ -1,0 +1,22 @@
+.task-name {
+	display: inline-block;
+	font-size: 20px;
+	margin-right: 20 px;
+	width: 200px;
+	overflow: hidden;
+}
+.task-status {
+	display: inline-block;
+	font-size: 20px;
+	margin-right: 20 px;
+	width: 200px;
+	overflow: hidden;
+}
+
+.edit-img {
+	height: 20px;
+	margin-right: 20px;
+}
+.trash-img {
+	height: 20px;
+}

@@ -11,7 +11,6 @@ const listTasksInDom = async () => {
 	let listOfTasks = await connectToApi('GET');
 	//get list of tasks
 	listOfTasks.forEach(task => {
-		console.log(task);
 		if (task.done === true) {
 			status = 'done';
 		} else {
@@ -24,6 +23,7 @@ const listTasksInDom = async () => {
 		//edit task listeners
 		document.getElementById(task.id).addEventListener('click', event => {
 			console.log('edit: ' + task.id);
+			alert('soon, next release...');
 		});
 		//delete task listeners
 		document.getElementById('d' + task.id).addEventListener('click', event => {

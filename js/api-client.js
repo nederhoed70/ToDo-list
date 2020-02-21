@@ -6,7 +6,6 @@ const connectToApi = async (method, newData) => {
 			method: method,
 			body: newData
 		});
-		console.log('json fetched');
 		const result = await connect.json();
 		let tasks = Object.keys(result).map(key => ({
 			id: key,
@@ -26,7 +25,7 @@ const deleteFromDb = async id => {
 			method: 'DELETE'
 			//body: body
 		});
-		console.log('deleted');
+
 		listTasksInDom();
 	} catch {
 		console.log('Oops an error...');

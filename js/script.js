@@ -1,34 +1,17 @@
 //addressing DOM elements
 const ul = document.getElementById('tasks-list');
 const li = document.createElement('li');
-const span = document.createElement('span');
 
-//interact with API, argument GET, PUT, DELETE
-const connectToApi = async (method, newData) => {
-	try {
-		const apiUrl = `https://wincacademydatabase.firebaseio.com/jeroen/tasks.json `;
-		const connect = await fetch(apiUrl, {
-			method: method,
-			body: newData
-		});
-		console.log('json fetched');
-		const result = await connect.json();
-		let tasks = Object.keys(result).map(key => ({
-			id: key,
-			description: result[key].description,
-			done: result[key].done
-		}));
-		return tasks;
-	} catch {
-		console.log('Oops an error...');
-	}
-};
+//const span = document.createElement('span');
+const taskSpan = document.getElementsByClassName('task-buttons').children;
 
 // get tasks from db and list them into the DOM
 const listTasksInDom = async () => {
+	ul.innerHTML = '';
 	let listOfTasks = await connectToApi('GET');
 	//get list of tasks
 	listOfTasks.forEach(task => {
+		console.log(task);
 		if (task.done === true) {
 			status = 'done';
 		} else {
@@ -37,9 +20,26 @@ const listTasksInDom = async () => {
 		//put each task into DOM
 		ul.appendChild(
 			document.createElement('li')
-		).innerHTML = `<span class="task-name">${task.description}</span><span class="task-status">${status}</span><span class="task-buttons"><img src="img/edit.png" id="${task.id}" class="edit-img" title="edit ${task.description}?"><img src="img/trash.png" id="${task.id}" class="trash-img" title="delete ${task.description}?"></span>`;
+		).innerHTML = `<span class="task-name">${task.description}</span><span class="task-status">${status}</span><span class="task-buttons"><img src="img/edit.png" id="${task.id}" class="edit-img" title="edit ${task.description}?"><img src="img/trash.png" id="d${task.id}" class="trash-img" title="delete ${task.description}?"></span><img src="img/check.png" id="c${task.id}" class="check-img" title="mark ${task.description} as done?"></span>`;
+		//edit task listeners
+		document.getElementById(task.id).addEventListener('click', event => {
+			console.log('edit: ' + task.id);
+		});
+		//delete task listeners
+		document.getElementById('d' + task.id).addEventListener('click', event => {
+			//delete task
+			deleteFromDb(task.id, 'DELETE');
+			//get updated tasklist
+			listTasksInDom();
+		});
+		//mark task as done listeners
+		document.getElementById('c' + task.id).addEventListener('click', event => {
+			//check task as done
+			editCheckedDb(task.id, 'PUT', true);
+			//get updated tasklist
+			listTasksInDom();
+		});
 	});
-	listenToTaskButtons();
 };
 
 const eventListeners = () => {
@@ -58,8 +58,6 @@ const eventListeners = () => {
 		taskBar.value = '';
 		//post object to api
 		connectToApi('POST', JSON.stringify(newTask));
-		//clear current tasklist
-		ul.innerHTML = '';
 		//get updated tasklist
 		listTasksInDom();
 	});
@@ -67,16 +65,14 @@ const eventListeners = () => {
 	taskBar.addEventListener('input', function() {});
 };
 
-const listenToTaskButtons = () => {
-	let buttonsDel = document.getElementsByClassName('trash-img');
-	console.log(buttonsDel);
-	buttonsDel.forEach(button => {
-		console.log(button);
-		button.addEventListener('click', event => {
-			console.log('click');
-		});
-	});
-};
+//respect the DOM
+// document.addEventListener('DOMContentLoaded', function() {
+// 	listTasksInDom();
+// 	eventListeners();
+// 	listenToTaskButtons();
+// });
+
+//dom listener werkt niet feedback welkom
 
 listTasksInDom();
 eventListeners();

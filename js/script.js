@@ -22,7 +22,6 @@ const listTasksInDom = async () => {
 		).innerHTML = `<span class="task-name">${task.description}</span><span class="task-status">${status}</span><span class="task-buttons"><img src="img/edit.png" id="${task.id}" class="edit-img" title="edit ${task.description}?"><img src="img/trash.png" id="d${task.id}" class="trash-img" title="delete ${task.description}?"></span><img src="img/check.png" id="c${task.id}" class="check-img" title="mark ${task.description} as done?"></span>`;
 		//edit task listeners
 		document.getElementById(task.id).addEventListener('click', event => {
-			console.log('edit: ' + task.id);
 			alert('soon, next release...');
 		});
 		//delete task listeners
@@ -65,14 +64,7 @@ const eventListeners = () => {
 	taskBar.addEventListener('input', function() {});
 };
 
-//respect the DOM
-// document.addEventListener('DOMContentLoaded', function() {
-// 	listTasksInDom();
-// 	eventListeners();
-// 	listenToTaskButtons();
-// });
-
-//dom listener werkt niet feedback welkom
-
-listTasksInDom();
-eventListeners();
+document.addEventListener('DOMContentLoaded', function() {
+	listTasksInDom();
+	eventListeners();
+});

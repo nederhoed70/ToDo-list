@@ -13,8 +13,8 @@ const connectToApi = async (method, newData) => {
 			done: result[key].done
 		}));
 		return tasks;
-	} catch {
-		console.log('Oops an error...');
+	} catch (err) {
+		console.log('Oops an error...', err);
 	}
 };
 //delete from db
@@ -27,8 +27,8 @@ const deleteFromDb = async id => {
 		});
 
 		listTasksInDom();
-	} catch {
-		console.log('Oops an error...');
+	} catch (err) {
+		console.log('Oops an error...', err);
 	}
 };
 
@@ -41,7 +41,7 @@ const editCheckedDb = async (id, method, body) => {
 		});
 		console.log('deleted');
 		listTasksInDom();
-	} catch {
-		console.log('Oops an error...');
+	} catch (err) {
+		console.log('Oops an error...', err);
 	}
 };

@@ -10,7 +10,7 @@ const listTasksInDom = async () => {
 	ul.innerHTML = '';
 	let listOfTasks = await connectToApi('GET');
 	//get list of tasks
-	listOfTasks.forEach(task => {
+	listOfTasks.forEach((task) => {
 		if (task.done === true) {
 			status = 'done';
 		} else {
@@ -19,25 +19,35 @@ const listTasksInDom = async () => {
 		//put each task into DOM
 		ul.appendChild(
 			document.createElement('li')
-		).innerHTML = `<span class="task-name">${task.description}</span><span class="task-status">${status}</span><span class="task-buttons"><img src="img/edit.png" id="${task.id}" class="edit-img" title="edit ${task.description}?"><img src="img/trash.png" id="d${task.id}" class="trash-img" title="delete ${task.description}?"></span><img src="img/check.png" id="c${task.id}" class="check-img" title="mark ${task.description} as done?"></span>`;
+		).innerHTML = `<span class="task-name-${status}">${task.description}</span>
+		<span class="task-status">${status}</span>
+		<span class="task-buttons">
+			<a href="#"><img src="img/edit.png" id="${task.id}" class="edit-img" title="edit ${task.description}?"></a>
+			<a href="#"><img src="img/trash.png" id="d${task.id}" class="trash-img" title="delete ${task.description}?"></a>
+			<a href="#"><img src="img/check.png" id="c${task.id}" class="check-img" title="mark ${task.description} as done?"></a>
+			</span>`;
 		//edit task listeners
-		document.getElementById(task.id).addEventListener('click', event => {
+		document.getElementById(task.id).addEventListener('click', (event) => {
 			alert('soon, next release...');
 		});
 		//delete task listeners
-		document.getElementById('d' + task.id).addEventListener('click', event => {
-			//delete task
-			deleteFromDb(task.id, 'DELETE');
-			//get updated tasklist
-			listTasksInDom();
-		});
+		document
+			.getElementById('d' + task.id)
+			.addEventListener('click', (event) => {
+				//delete task
+				deleteFromDb(task.id, 'DELETE');
+				//get updated tasklist
+				listTasksInDom();
+			});
 		//mark task as done listeners
-		document.getElementById('c' + task.id).addEventListener('click', event => {
-			//check task as done
-			editCheckedDb(task.id, 'PUT', true);
-			//get updated tasklist
-			listTasksInDom();
-		});
+		document
+			.getElementById('c' + task.id)
+			.addEventListener('click', (event) => {
+				//check task as done
+				editCheckedDb(task.id, 'PUT', true);
+				//get updated tasklist
+				listTasksInDom();
+			});
 	});
 };
 
@@ -46,11 +56,11 @@ const eventListeners = () => {
 	const submitButton = document.getElementById('submit-task');
 	const taskBar = document.getElementById('new-task');
 	//press submit to recieve value of input-filed
-	submitButton.addEventListener('click', function() {
+	submitButton.addEventListener('click', function () {
 		//new task in object
 		let newTask = {
 			description: taskBar.value,
-			done: false
+			done: false,
 		};
 		console.log(newTask);
 		//clear inputfield after submit
@@ -61,10 +71,10 @@ const eventListeners = () => {
 		listTasksInDom();
 	});
 	//taskbar gets an eventistener to pass the value on submit
-	taskBar.addEventListener('input', function() {});
+	taskBar.addEventListener('input', function () {});
 };
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 	listTasksInDom();
 	eventListeners();
 });

@@ -2,21 +2,20 @@ body {
 	font-family: 'bitter', Arial, Helvetica, sans-serif;
 }
 ul {
-    display: flex;
-    flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 	padding: 0px;
 }
 li {
-    display: flex;
+	display: flex;
 	justify-content: space-between;
 	border: 2px solid #585858;
-    margin: 3px;
-    fl
+	margin: 3px;
 }
 input {
-    border-radius: 20px;
-    border: 2px solid #585858;
-    font-size: 20px;
+	border-radius: 20px;
+	border: 2px solid #585858;
+	font-size: 20px;
 }
 .taskname li {
 	padding: 3px 20px;
@@ -51,17 +50,17 @@ input {
 }
 
 .edit-img {
-    padding-top:3px;
+	padding-top: 3px;
 	height: 20px;
 	margin-right: 20px;
 }
 .trash-img {
-    padding-top:3px;
+	padding-top: 3px;
 	height: 20px;
 	margin-right: 20px;
 }
 .check-img {
-    height: 25px;
+	height: 25px;
 
 	margin-right: 20px;
 }

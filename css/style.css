@@ -1,69 +1,112 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
 body {
 	font-family: 'bitter', Arial, Helvetica, sans-serif;
 }
+header {
+	background-color: hsl(0, 0%, 95%);
+	border-bottom: solid 1px #181818;
+	padding-bottom: 1em;
+}
+h1 {
+	font-size: 2em;
+	padding-left: 0.3em;
+}
+h2 {
+	font-size: 1.5em;
+	padding-left: 0.5em;
+}
 ul {
-    display: flex;
-    flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 	padding: 0px;
 }
 li {
-    display: flex;
+	display: flex;
 	justify-content: space-between;
 	border: 2px solid #585858;
-    margin: 3px;
-    fl
+	margin: 3px;
 }
 input {
-    border-radius: 20px;
-    border: 2px solid #585858;
-    font-size: 20px;
+	border-radius: 20px;
+	border: 2px solid #585858;
+	font-size: 1.2em;
+}
+#new-task {
+	padding-left: 0.5em;
+}
+#submit-task {
+	background-color: hsl(202, 100%, 50%);
+	color: #fff;
+	font-size: 0.9em;
+	padding: 0.2em;
+	margin: 0.5em;
+	border-color: hsl(202, 100%, 40%);
+	cursor: pointer;
+}
+#submit-task:hover {
+	background-color: hsl(202, 50%, 50%);
 }
 .taskname li {
 	padding: 3px 20px;
-	margin-left: 30px;
+	margin-left: 1.9em;
 }
 
 .task-name-pending {
 	display: inline-block;
-	font-size: 20px;
+	font-size: 1.2em;
 	padding: 0px 20 px;
-	width: 200px;
+	width: 10em;
 	overflow: hidden;
 	margin-left: 1em;
+	text-transform: lowercase;
 }
 
 .task-name-done {
+	color: hsl(0, 0%, 55%);
 	display: inline-block;
-	font-size: 20px;
+	font-size: 1.2em;
 	padding: 0px 20 px;
-	width: 200px;
+	width: 10em;
 	overflow: hidden;
 	text-decoration: line-through;
 	margin-left: 1em;
+	text-transform: lowercase;
 }
 
 .task-status {
 	display: inline-block;
-	font-size: 20px;
+	color: hsl(0, 80%, 54%);
+	font-size: 1.2em;
 	margin-right: 20 px;
-	width: 200px;
+	width: 10em;
 	overflow: hidden;
 }
-
-.edit-img {
-    padding-top:3px;
-	height: 20px;
-	margin-right: 20px;
+.done {
+	color: hsl(140, 80%, 54%);
 }
-.trash-img {
-    padding-top:3px;
-	height: 20px;
-	margin-right: 20px;
-}
-.check-img {
-    height: 25px;
 
-	margin-right: 20px;
+.fa-trash-alt {
+	color: #585858;
+	font-size: 0.9em;
+	margin-right: 1.2em;
+}
+.fa-check {
+	color: hsl(140, 80%, 54%);
+	font-size: 0.9em;
+	margin-right: 1.2em;
+}
+.fa-history {
+	color: hsl(12, 80%, 54%);
+	font-size: 0.9em;
+	margin-right: 1.2em;
+}
+.fa-edit {
+	color: hsl(209, 80%, 54%);
+	font-size: 0.9em;
+	margin-right: 1.2em;
 }
 
 @font-face {
@@ -90,4 +133,24 @@ input {
 	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
 		U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
 		U+FEFF, U+FFFD;
+}
+@media only screen and (max-width: 800px) {
+	body {
+		font-size: 13px;
+	}
+}
+@media only screen and (max-width: 600px) {
+	body {
+		font-size: 12px;
+	}
+}
+@media only screen and (max-width: 400px) {
+	body {
+		font-size: 10px;
+	}
+}
+@media only screen and (max-width: 300px) {
+	body {
+		font-size: 9px;
+	}
 }

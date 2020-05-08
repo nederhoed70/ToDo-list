@@ -92,21 +92,31 @@ input {
 	color: #585858;
 	font-size: 0.9em;
 	margin-right: 1.2em;
+	cursor: pointer;
 }
 .fa-check {
 	color: hsl(140, 80%, 54%);
 	font-size: 0.9em;
 	margin-right: 1.2em;
+	cursor: pointer;
 }
 .fa-history {
 	color: hsl(12, 80%, 54%);
 	font-size: 0.9em;
 	margin-right: 1.2em;
+	cursor: pointer;
 }
 .fa-edit {
 	color: hsl(209, 80%, 54%);
 	font-size: 0.9em;
 	margin-right: 1.2em;
+	cursor: pointer;
+}
+#alert-message {
+	text-align: center;
+	background-color: #fffb1f;
+	font-weight: 200;
+	font-size: 0.8em;
 }
 
 @font-face {

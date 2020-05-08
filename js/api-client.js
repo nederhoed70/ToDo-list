@@ -25,7 +25,6 @@ const deleteFromDb = async (id) => {
 			method: 'DELETE',
 			//body: body
 		});
-
 		listTasksInDom();
 	} catch (err) {
 		alert('Oops an error...', err);

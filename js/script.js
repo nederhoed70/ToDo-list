@@ -5,6 +5,16 @@ const li = document.createElement('li');
 //const span = document.createElement('span');
 const taskSpan = document.getElementsByClassName('task-buttons').children;
 
+//Alert message
+const showAlert = (message) => {
+	messageLocation = document.getElementById('alert-message');
+	messageLocation.innerHTML = message;
+	messageLocation.style.display = 'block';
+	setTimeout(() => {
+		messageLocation.style.display = 'none';
+	}, 3000);
+};
+
 // get tasks from db and list them into the DOM
 const listTasksInDom = async () => {
 	ul.innerHTML = '';
@@ -32,15 +42,16 @@ const listTasksInDom = async () => {
 		).innerHTML = `<span class="task-name-${currentTask.status}">${task.description}</span>
 		<span class="task-status ${currentTask.status}">${currentTask.status}</span>
 		<span class="task-buttons">
-			<a href="#"><i class="far fa-edit" id="${task.id}" class="edit-img" title="edit ${task.description}?"></i></a>
-			<a href="#"><i class="far fa-trash-alt" id="d${task.id}" title="delete ${task.description}?"></i></a>
-			<a href="#"><i class="${currentTask.class}" id="c${task.id}" title="mark ${task.description} as ${currentTask.change}?"></i></a>
+			<i class="far fa-edit" id="${task.id}" class="edit-img" title="edit ${task.description}?"></i>
+			<i class="far fa-trash-alt" id="d${task.id}" title="delete ${task.description}?"></i>
+			<i class="${currentTask.class}" id="c${task.id}" title="mark ${task.description} as ${currentTask.change}?"></i>
 			</span>`;
 		//edit task listeners
 		document.getElementById(task.id).addEventListener('click', (event) => {
 			const changedTask = prompt('Change task description:', task.description);
-			if (changedTask === task.description) {
-				alert('nothing changed');
+			if (changedTask === task.description || changedTask === null) {
+				showAlert('no changes made');
+				//alert('nothing changed');
 			} else {
 				editDescriptionDb(
 					task.id,

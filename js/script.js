@@ -9,26 +9,45 @@ const taskSpan = document.getElementsByClassName('task-buttons').children;
 const listTasksInDom = async () => {
 	ul.innerHTML = '';
 	let listOfTasks = await connectToApi('GET');
+	let change;
+	let changeClass;
 	//get list of tasks
 	listOfTasks.forEach((task) => {
 		if (task.done === true) {
-			status = 'done';
+			currentTask = {
+				status: 'done',
+				change: 'pending',
+				class: 'fas fa-history',
+			};
 		} else {
-			status = 'pending';
+			currentTask = {
+				status: 'pending',
+				change: 'done',
+				class: 'fas fa-check',
+			};
 		}
 		//put each task into DOM
 		ul.appendChild(
 			document.createElement('li')
-		).innerHTML = `<span class="task-name-${status}">${task.description}</span>
-		<span class="task-status">${status}</span>
+		).innerHTML = `<span class="task-name-${currentTask.status}">${task.description}</span>
+		<span class="task-status ${currentTask.status}">${currentTask.status}</span>
 		<span class="task-buttons">
-			<a href="#"><img src="img/edit.png" id="${task.id}" class="edit-img" title="edit ${task.description}?"></a>
-			<a href="#"><img src="img/trash.png" id="d${task.id}" class="trash-img" title="delete ${task.description}?"></a>
-			<a href="#"><img src="img/check.png" id="c${task.id}" class="check-img" title="mark ${task.description} as done?"></a>
+			<a href="#"><i class="far fa-edit" id="${task.id}" class="edit-img" title="edit ${task.description}?"></i></a>
+			<a href="#"><i class="far fa-trash-alt" id="d${task.id}" title="delete ${task.description}?"></i></a>
+			<a href="#"><i class="${currentTask.class}" id="c${task.id}" title="mark ${task.description} as ${currentTask.change}?"></i></a>
 			</span>`;
 		//edit task listeners
 		document.getElementById(task.id).addEventListener('click', (event) => {
-			alert('soon, next release...');
+			const changedTask = prompt('Change task description:', task.description);
+			if (changedTask === task.description) {
+				alert('nothing changed');
+			} else {
+				editDescriptionDb(
+					task.id,
+					'PUT',
+					JSON.stringify({ description: changedTask })
+				);
+			}
 		});
 		//delete task listeners
 		document
@@ -43,10 +62,12 @@ const listTasksInDom = async () => {
 		document
 			.getElementById('c' + task.id)
 			.addEventListener('click', (event) => {
-				//check task as done
-				editCheckedDb(task.id, 'PUT', true);
-				//get updated tasklist
-				listTasksInDom();
+				//check task as done or pending
+				if (!task.done) {
+					editCheckedDb(task.id, 'PUT', true);
+				} else {
+					editCheckedDb(task.id, 'PUT', false);
+				}
 			});
 	});
 };
@@ -57,16 +78,19 @@ const eventListeners = () => {
 	const taskBar = document.getElementById('new-task');
 	//press submit to recieve value of input-filed
 	submitButton.addEventListener('click', function () {
-		//new task in object
-		let newTask = {
-			description: taskBar.value,
-			done: false,
-		};
-		console.log(newTask);
-		//clear inputfield after submit
-		taskBar.value = '';
-		//post object to api
-		connectToApi('POST', JSON.stringify(newTask));
+		if (taskBar.value) {
+			//new task in object
+			let newTask = {
+				description: taskBar.value,
+				done: false,
+			};
+			//clear inputfield after submit
+			taskBar.value = '';
+			//post object to api
+			connectToApi('POST', JSON.stringify(newTask));
+		} else {
+			alert('You must enter a new task');
+		}
 		//get updated tasklist
 		listTasksInDom();
 	});

@@ -12,20 +12,40 @@
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="icon" href="./favicon.ico" sizes="32x32" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<script
+			src="https://kit.fontawesome.com/c6e4ccdf30.js"
+			crossorigin="anonymous"
+		></script>
+		<script>
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != 'dataLayer' ? '&l=' + l : '';
+				j.async = true;
+				j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, 'script', 'dataLayer', 'GTM-5QDWZ5G');
+		</script>
 	</head>
 	<body>
 		<header>
 			<div id="title"><h1>ToDo list</h1></div>
 			<div id="header-search">
-				<input type="text" id="new-task" /><input
-					type="submit"
-					value="add task"
-					id="submit-task"
-				/>
+				<form>
+					<input type="text" id="new-task" />
+					<input type="submit" value="add task" id="submit-task" />
+				</form>
 			</div>
 		</header>
 		<main>
-			<h2>Taken</h2>
+			<h2>Tasks</h2>
 			<ul id="tasks-list"></ul>
 		</main>
 		<!--[if lt IE 7]>
@@ -36,5 +56,13 @@
 		<![endif]-->
 		<script src="js/api-client.js"></script>
 		<script src="js/script.js"></script>
+		<noscript
+			><iframe
+				src="https://www.googletagmanager.com/ns.html?id=GTM-5QDWZ5G"
+				height="0"
+				width="0"
+				style="display: none; visibility: hidden;"
+			></iframe
+		></noscript>
 	</body>
 </html>
